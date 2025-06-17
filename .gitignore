@@ -1,0 +1,45 @@
+# ========================
+# BUILD & TEMP FILES
+# ========================
+bin/
+obj/
+*.log
+*.tmp
+*.cache
+
+# ========================
+# USER / ENV FILES
+# ========================
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+*.iml
+
+# ========================
+# ENTITY FRAMEWORK (OK!)
+# ========================
+# Migrations folder BISA kamu simpan ke Git
+# Tapi kalau mau bersih dari snapshot DB dev lokal:
+# Uncomment baris di bawah jika tidak mau include migration:
+# Migrations/
+
+# ========================
+# SECRETS
+# ========================
+.env
+appsettings.Development.json
+appsettings.Local.json
+
+# ========================
+# OS-SPECIFIC FILES
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# GIT / CI CONFIG
+# ========================
+*.orig
