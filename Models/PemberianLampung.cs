@@ -17,9 +17,9 @@ namespace BACKEND.Models
         public string? KabupatenKota { get; set; }
         public string? Kecamatan { get; set; }
 
-        public int NIK { get; set; }
-        public int NISN { get; set; }
-        public int? NPSN { get; set; }
+        public string? NIK { get; set; }
+        public string? NISN { get; set; }
+        public string? NPSN { get; set; }
 
         public int? Kelas { get; set; }
         public string? Rombel { get; set; }
@@ -44,7 +44,7 @@ namespace BACKEND.Models
         public string? VirtualAccount { get; set; }
         public string? VirtualAccountNominasi { get; set; }
 
-        public int? Rekening { get; set; }
+        public string? Rekening { get; set; }
         public string? Bank { get; set; }
         public string? TanggalAktifasi { get; set; }
         public string? TanggalMulaiPecairan { get; set; }
