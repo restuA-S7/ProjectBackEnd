@@ -28,7 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 //harus kasih CROS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", policy =>
+    options.AddPolicy("AllowSpecificOrigin", policy =>
     {
         policy.WithOrigins(" http://localhost:5173")
               .AllowAnyHeader()
@@ -56,7 +56,7 @@ var app = builder.Build();
 // app.MapGet("/", () => "API is running...");
 
 //aktifkan CROS (letakkan sebelum MapGraphQL!)
-app.UseCors("AllowReactApp");
+app.UseCors("AllowSpecificOrigin");
 
 app.MapGraphQL();
 
