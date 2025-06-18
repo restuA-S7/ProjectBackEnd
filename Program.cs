@@ -26,15 +26,26 @@ var builder = WebApplication.CreateBuilder(args);
 // Console.WriteLine("DEBUG Conn String: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 // Load PostgreSQL connection
 //harus kasih CROS
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowSpecificOrigin", policy =>
+//     {
+//         policy.WithOrigins(" http://localhost:5173")
+//               .AllowAnyHeader()
+//               .AllowAnyMethod()
+//               .AllowCredentials();
+//     });
+// });
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
-    {
-        policy.WithOrigins(" http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
+    options.AddPolicy(name: "AllowAllOrigins", // Nama baru untuk kebijakan yang longgar
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()    // Izinkan SEMUA origin
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                                 // .AllowCredentials(); // Hapus ini jika pakai AllowAnyOrigin()
+                      });
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -57,7 +68,7 @@ var app = builder.Build();
 // app.MapGet("/", () => "API is running...");
 
 //aktifkan CROS (letakkan sebelum MapGraphQL!)
-app.UseCors("AllowSpecificOrigin");
+app.UseCors("AllowAllOrigins");
 
 app.MapGraphQL();
 
