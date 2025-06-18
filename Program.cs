@@ -25,6 +25,17 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 // Console.WriteLine("DEBUG Conn String: " + builder.Configuration.GetConnectionString("DefaultConnection"));
 // Load PostgreSQL connection
+//harus kasih CROS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins(" http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
@@ -44,8 +55,8 @@ var app = builder.Build();
 
 // app.MapGet("/", () => "API is running...");
 
-// //aktifkan CROS (letakkan sebelum MapGraphQL!)
-// app.UseCors("AllowReactApp");
+//aktifkan CROS (letakkan sebelum MapGraphQL!)
+app.UseCors("AllowReactApp");
 
 app.MapGraphQL();
 
