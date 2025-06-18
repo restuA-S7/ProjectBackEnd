@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using BACKEND.Models;
+using BACKEND.Models.PemberianLampung;
 
 public class AppDbContext : DbContext
 {

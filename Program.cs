@@ -17,6 +17,9 @@
 
 // app.MapGraphQL(); // /graphql
 // app.Run();
+using BACKEND.LaporanPemberian.Queries;
+using BACKEND.LaporanPemberian.Services;
+using BACKEND.LaporanPemberian.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,11 +29,24 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+//register service
+builder.Services.AddScoped<IGetPemberianLampung, PemberianLampungService>();
+
 // Siapkan DI untuk GraphQL nanti (belum aktif)
-builder.Services.AddControllers();
+builder.Services
+// .AddControllers()
+        .AddGraphQLServer()
+        .AddQueryType<PemberianLampungQueries>()
+        .AddSorting()
+        .AddFiltering();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "API is running...");
+// app.MapGet("/", () => "API is running...");
+
+// //aktifkan CROS (letakkan sebelum MapGraphQL!)
+// app.UseCors("AllowReactApp");
+
+app.MapGraphQL();
 
 app.Run();
