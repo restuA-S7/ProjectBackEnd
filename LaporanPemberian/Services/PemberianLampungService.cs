@@ -28,7 +28,9 @@ namespace BACKEND.LaporanPemberian.Services
                             TipeSK = p.TipeSK,
                             NomorSK = p.NomorSK,
                             Bank = p.Bank,
-                            Rekening = p.Rekening
+                            Rekening = p.Rekening,
+                            Fase = p.Fase,
+                            LayakPIP = p.LayakPIP
                         }).FirstOrDefault();//.ToList();
             if (result == null) throw new ArgumentException("Data Penerimaan Tidak DiTemukan");
 

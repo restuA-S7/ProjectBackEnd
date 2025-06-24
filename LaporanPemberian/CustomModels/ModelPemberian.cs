@@ -13,5 +13,7 @@ namespace BACKEND.LaporanPemberian.CustomModels
         public string? NomorSK { get; set; }
         public string? Bank { get; set; }
         public string? Rekening { get; set; }
+        public string? Fase { get; set; }
+        public string? LayakPIP { get; set; }
     }
 }
